@@ -13,7 +13,23 @@ Go here for more details: https://learn.adafruit.com/adafruit-neotrellis-m4/uf2-
 
 CircuitPython makes this already straightforward coding process even easier. First you need to load the CircuitPython on to your device. You do this by loading a new UF2 bootloader for the version of CircuitPython appropriate to your device. (For example, here is the link to the CircuitPython bootloaders for the NeoTrellis M4: https://circuitpython.org/board/trellis_m4_express/. You'll find scores of others on GitHub. Here are the v5 beta 2 versions: https://github.com/adafruit/circuitpython/releases/tag/5.0.0-beta.2) When the device reboots it will mount the CircuitPython environment, and publish a new shared disk volume called CIRCUITPY.
 
-To run Python code on your device, you just drop a Python source file into the CIRCUITPY volume (with an appropriate filename: either _code.py_, _code.txt_, _main.py_, or _main.txt_, but _code.py_ is usual). CircuitPython devices are usually configured to auto-reboot when code changes, so your new Python code should run immediately. If not, just press the reset button once. 
+To run Python code on your device, you just drop a Python source file into the CIRCUITPY volume (with an appropriate filename: either _code.py_, _code.txt_, _main.py_, or _main.txt_, but _code.py_ is usual). CircuitPython devices are usually configured to auto-reboot when code changes, so your new Python code should run immediately. If not, just press the reset button once.
+
+CircuitPython does most of the things you expect from a Python environment (see https://learn.adafruit.com/circuitpython-essentials/circuitpython-built-ins for details), but you'll need to add library code to support the devices you're using. For this you need to know about the CircuitPython Library Bundles at https://circuitpython.org/libraries.
+
+The library bundles contain masses of code (in compressed .MPY format) with support for specific bits of hardware. You just move the pieces you need into the ./lib folder of the CIRCUITPY volume.
+
+For example, the NeoTrellis M4 Express example includes the following lines:
+
+import adafruit_trellism4
+import adafruit_ds3231
+
+These imports refer to the _adafruit_trellisM4.mpy_
+and _adafruit_ds3231.mpy_ files from the CircuitPython Library Bundle.
+
+Note 1: Watch out for version mismatches! Use library files from the CircuitPython Library Bundle for your CircuitPython environment - v4 for v4, v5 for v5.
+
+Note 2: If you're using devices from AdaFruit, the documentation on how to use CircuitPython with the device should tell you exactly which library files you'll need to copy to the CIRCUITPY/lib directory. For example, the documentation page for the DS3231 RTC chip (https://learn.adafruit.com/adafruit-ds3231-precision-rtc-breakout/circuitpython) lists the three libraries you'll need: _adafruit_ds3231.mpy_, _adafruit_bus_device_, and _adafruit_register_. (The latter two are actually directories, not individual files.)
 
 ### CircuitPython References
 
