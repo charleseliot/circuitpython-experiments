@@ -24,6 +24,8 @@ def writeBcdDigitToColumn(val, col):
         val = val // 2
 
 def initializeTrellis():
+    trellis.pixels.brightness = 0.5
+
     red = 0
     blue = 0
     green = 0
