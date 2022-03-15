@@ -1,5 +1,5 @@
 # circuitpython-experiments
-Code to play with devices using CircuitPython.
+Code to play with devices using CircuitPython. (This commented added to test Teams integration)
 
 ## Working with CircuitPython
 
